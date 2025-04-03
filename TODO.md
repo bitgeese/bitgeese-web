@@ -20,7 +20,7 @@
 
 ## P3: Advanced SEO & Content
 
-- [ ] **Implement Structured Data (Schema.org):** Add relevant schema markup (e.g., Organization, WebSite, Article) to pages/layouts to improve search engine understanding.
+- [x] **Implement Structured Data (Schema.org):** Add relevant schema markup (e.g., Organization, WebSite, Article) to pages/layouts to improve search engine understanding.
 - [ ] **Content Review:** Analyze existing content for clarity, relevance, and keyword optimization (requires content expertise).
 - [ ] **Cross-browser Testing:** Test the website on major browsers (Chrome, Firefox, Safari, Edge).
 

@@ -28,6 +28,11 @@ const {
   tags
 } = Astro.props;
 
+// Define base URL and site name
+const siteUrl = Astro.site?.toString() || "https://your-default-domain.com"; // Replace with fallback if needed
+const siteName = "Bitgeese";
+const logoPath = "/logo.png"; // Ensure this logo exists or update path
+
 // Define social links here
 const githubUrl = "https://github.com/bitgeese";
 const twitterUrl = "https://x.com/MaciejJanowski";
@@ -47,6 +52,48 @@ const openGraphArticle = article ? {
   authors: authors,
   section: section,
   tags: tags
+} : undefined;
+
+// Define Schema.org structures
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: siteUrl,
+  logo: new URL(logoPath, siteUrl).toString(),
+  sameAs: [
+    githubUrl,
+    twitterUrl
+    // Add other relevant social/profile links here
+  ]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: siteUrl,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${siteUrl}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const articleSchema = article ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  image: [new URL(image, siteUrl).toString()],
+  datePublished: publishedTime,
+  dateModified: modifiedTime || publishedTime,
+  author: authors ? authors.map(name => ({ "@type": "Person", name })) : [{ "@type": "Organization", name: siteName }],
+  publisher: { "@type": "Organization", name: siteName, url: siteUrl, logo: new URL(logoPath, siteUrl).toString() },
+  description: description,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": Astro.url.href
+  }
 } : undefined;
 ---
 
@@ -93,6 +140,15 @@ const openGraphArticle = article ? {
         ],
       }}
     />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" is:inline set:html={
+      JSON.stringify([
+        organizationSchema,
+        websiteSchema,
+        ...(articleSchema ? [articleSchema] : [])
+      ])
+    }/>
     
     <!-- Prevent flash of unstyled content -->
     <script is:inline>
