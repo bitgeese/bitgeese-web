@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 // Component Imports
-import Button from '../components/Button.astro';
+import Layout from '../layouts/Layout.astro';
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
@@ -17,9 +17,36 @@ import Button from '../components/Button.astro';
 	</head>
 
 	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
+		<Layout title="Maciej Janowski | Backend Engineer" description="Backend Engineer (web + ai)">
+			<main class="flex-1 flex flex-col items-center justify-center p-8 font-mono text-sm">
+				<div class="w-full max-w-md space-y-8">
+					<nav class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-neutral-600 dark:text-neutral-400">
+						<a href="/" class="font-medium text-black dark:text-white hover:underline">bitgeese</a>
+						<span>/</span>
+						<a href="https://twitter.com/MaciejJanowski" target="_blank" rel="noopener noreferrer" class="hover:underline">twitter</a>
+						<span>/</span>
+						<a href="https://github.com/bitgeese" target="_blank" rel="noopener noreferrer" class="hover:underline">github</a>
+						<span>/</span>
+						<a href="https://linkedin.com/in/maciej-janowski-57755a149/" target="_blank" rel="noopener noreferrer" class="hover:underline">linkedin</a>
+						<span>/</span>
+						<a href="https://upwork.com/freelancers/~01659ae94e84b70d3f" target="_blank" rel="noopener noreferrer" class="hover:underline">upwork</a>
+						<span>/</span>
+						<a href="https://fram.dev" target="_blank" rel="noopener noreferrer" class="hover:underline">fram.dev</a>
+					</nav>
+
+					<section>
+						<p class="mb-3 text-neutral-800 dark:text-neutral-200">Planning a newsletter on freelancing, python, ai coding, finding work, and building a personal brand as a developer.</p>
+						<form action="#" method="post" class="flex items-center gap-2">
+							<input type="email" required placeholder="m@example.com" name="email" class="h-8 flex-1 rounded border border-neutral-300 dark:border-neutral-700 bg-transparent px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-400 dark:focus:ring-neutral-600" />
+							<button type="submit" class="h-8 rounded border border-neutral-400 dark:border-neutral-600 bg-neutral-100 dark:bg-neutral-800 px-3 text-sm font-medium hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus:ring-1 focus:ring-neutral-400 dark:focus:ring-neutral-600">Notify Me</button>
+						</form>
+					</section>
+
+					<section>
+						<a href="https://donate.stripe.com/fZedRycPfguO3q86oo" target="_blank" rel="noopener noreferrer" class="font-medium text-black dark:text-white hover:underline">Sponsor My Work</a>
+					</section>
+				</div>
+			</main>
+		</Layout>
 	</body>
 </html>
