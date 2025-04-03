@@ -1,12 +1,12 @@
 ---
-title: 'Example Writing'
+title: 'How to become AI Python Developer in 2025'
 pubDate: 2024-05-15
-description: 'This is a sample piece of writing.'
-author: 'AI Assistant'
+description: 'Introduction to skills and projects you need to showcase to get a job as python ai developer in 2025'
+author: 'bitgeese'
 image:
   url: '/images/writing-placeholder.png'
   alt: 'Placeholder image for writing'
-tags: ["example", "thoughts"]
+tags: ["job hunt"]
 ---
 
 ## Introduction
