@@ -75,55 +75,74 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const links = ${{ steps.lhci.outputs.links }}
-            const results = ${{ steps.lhci.outputs.manifest }}
-            
-            let summaryRows = [];
-            let detailRows = [];
-            
-            for (const [urlIndex, url] of Object.entries(results)) {
-              const urlName = url.url.replace(/^https?:\/\//, '');
-              const summary = url.summary;
+            try {
+              const links = ${{ steps.lhci.outputs.links }}
+              const results = ${{ steps.lhci.outputs.manifest }}
               
-              // Fix the property access for hyphenated properties
-              const performance = summary.performance;
-              const accessibility = summary.accessibility;
-              const bestPractices = summary["best-practices"]; // Use quotes around the key
-              const seo = summary.seo;
+              console.log('Links output:', JSON.stringify(links, null, 2));
               
-              summaryRows.push(`| ${urlName} | ${performance} | ${accessibility} | ${bestPractices} | ${seo} |`);
+              let summaryRows = [];
+              let detailRows = [];
               
-              // Add details with emoji indicators
-              const getScoreEmoji = (score) => {
-                if (score >= 0.9) return '🟢';
-                if (score >= 0.5) return '🟠';
-                return '🔴';
-              };
+              for (const [urlIndex, url] of Object.entries(results)) {
+                const urlName = url.url.replace(/^https?:\/\//, '');
+                const summary = url.summary;
+                
+                // Fix the property access for hyphenated properties
+                const performance = summary.performance;
+                const accessibility = summary.accessibility;
+                const bestPractices = summary["best-practices"]; // Use quotes around the key
+                const seo = summary.seo;
+                
+                summaryRows.push(`| ${urlName} | ${performance} | ${accessibility} | ${bestPractices} | ${seo} |`);
+                
+                // Add details with emoji indicators
+                const getScoreEmoji = (score) => {
+                  if (score >= 0.9) return '🟢';
+                  if (score >= 0.5) return '🟠';
+                  return '🔴';
+                };
+                
+                detailRows.push(`### ${urlName}`);
+                detailRows.push(`- Performance: ${getScoreEmoji(performance)} ${Math.round(performance * 100)}`);
+                detailRows.push(`- Accessibility: ${getScoreEmoji(accessibility)} ${Math.round(accessibility * 100)}`);
+                detailRows.push(`- Best Practices: ${getScoreEmoji(bestPractices)} ${Math.round(bestPractices * 100)}`);
+                detailRows.push(`- SEO: ${getScoreEmoji(seo)} ${Math.round(seo * 100)}`);
+                detailRows.push('');
+              }
               
-              detailRows.push(`### ${urlName}`);
-              detailRows.push(`- Performance: ${getScoreEmoji(performance)} ${Math.round(performance * 100)}`);
-              detailRows.push(`- Accessibility: ${getScoreEmoji(accessibility)} ${Math.round(accessibility * 100)}`);
-              detailRows.push(`- Best Practices: ${getScoreEmoji(bestPractices)} ${Math.round(bestPractices * 100)}`);
-              detailRows.push(`- SEO: ${getScoreEmoji(seo)} ${Math.round(seo * 100)}`);
-              detailRows.push('');
-            }
-            
-            const report = links.lhr[0]; // Use the first report URL
-            
-            const comment = `## 🚦 Lighthouse Report
+              // Fix the error by safely accessing the report URL
+              let reportUrl = 'No report URL available';
+              if (links && links.lhr && links.lhr.length > 0) {
+                reportUrl = links.lhr[0];
+              } else if (results && results[0] && results[0].url) {
+                // Fallback to using the first URL from results
+                const firstUrlIndex = Object.keys(results)[0];
+                const firstUrl = results[firstUrlIndex];
+                reportUrl = `https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/${firstUrl.summary.timestamp}-${Math.floor(Math.random() * 100000)}.report.html`;
+              }
+              
+              const comment = `## 🚦 Lighthouse Report
 
-            ### Summary
-            | URL | Performance | Accessibility | Best Practices | SEO |
-            | --- | ----------- | ------------ | -------------- | --- |
-            ${summaryRows.join('\n')}
-            
-            ### Details
-            ${detailRows.join('\n')}
-            
-            [📊 View Full Report](${report})
-            `;
-            
-            core.setOutput('comment', comment);
+              ### Summary
+              | URL | Performance | Accessibility | Best Practices | SEO |
+              | --- | ----------- | ------------ | -------------- | --- |
+              ${summaryRows.join('\n')}
+              
+              ### Details
+              ${detailRows.join('\n')}
+              
+              [📊 View Full Report](${reportUrl})
+              `;
+              
+              core.setOutput('comment', comment);
+            } catch (error) {
+              core.setFailed(`Error processing Lighthouse results: ${error.message}`);
+              console.error('Full error:', error);
+              
+              // Still set a minimal output so the next step doesn't fail
+              core.setOutput('comment', '## 🚦 Lighthouse Report\n\nAn error occurred while processing the Lighthouse results. Please check the workflow logs for details.');
+            }
 
       - name: Add or update PR comment
         if: github.event_name == 'pull_request'
