@@ -9,7 +9,7 @@
 - [x] **Check Image Optimization:** Set up Astro's built-in image optimization configuration in `astro.config.mjs`. Created demo page at `/image-demo` to showcase best practices.
 - [x] **Run Dependency Audit:** Executed `pnpm audit` to check for known vulnerabilities in project dependencies - no issues found.
 - [x] **Configure Canonical URLs:** Verified that `astro-seo` integration handles `rel="canonical"` links correctly using `Astro.url.href` and the configured `site` property.
-- [ ] **Performance Audit (Setup):** Configured Lighthouse CI with GitHub Actions (`.github/workflows/lighthouse.yml`) to run audits on PRs. Initial thresholds set in `lighthouserc.js`. Need to monitor results and adjust budgets.
+- [x] **Performance Audit (Setup):** Configured Lighthouse CI with GitHub Actions (`.github/workflows/lighthouse.yml`) to run audits on PRs. Initial thresholds set in `lighthouserc.js`. Enhanced with additional workflows for PR validation, preview deployments, cleanup, and detailed Lighthouse reporting.
 - [ ] **Setup Google Search Console:** Verify site ownership and monitor indexing status, crawl errors, and performance reports.
 
 ## P2: Accessibility, Schema & Best Practices

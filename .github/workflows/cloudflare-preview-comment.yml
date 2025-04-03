@@ -1,0 +1,65 @@
+name: Cloudflare Preview Comment
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  preview-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add or update comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const branch = context.payload.pull_request.head.ref;
+            const projectName = 'bitgeese-web'; // Update with your Cloudflare Pages project name
+            
+            // Format the likely Cloudflare Pages preview URL
+            const previewUrl = `https://${branch}.${projectName}.pages.dev`;
+            
+            // Check if a comment with preview already exists
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number
+            });
+            
+            const commentSignature = '<!-- CLOUDFLARE_PREVIEW_COMMENT -->';
+            const existingComment = comments.find(comment => comment.body.includes(commentSignature));
+            
+            const commentBody = `${commentSignature}
+            ## 🚀 Cloudflare Pages Preview
+            
+            Your changes should be automatically deployed to Cloudflare Pages.
+            
+            #### 🔍 Preview URL:
+            [${previewUrl}](${previewUrl})
+            
+            *Note: It may take a few minutes for your changes to be deployed.*
+            `;
+            
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existingComment.id,
+                body: commentBody
+              });
+              console.log('Updated existing preview comment');
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body: commentBody
+              });
+              console.log('Created new preview comment');
+            } 
