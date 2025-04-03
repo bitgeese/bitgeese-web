@@ -1,19 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
+// import { Image } from 'astro:assets';
 
 // We'll use a more reliable static image
 ---
 
-<Layout title="Image Optimization Demo" description="Demonstrating Astro's built-in image optimization">
+<Layout
+  title="Image Optimization Demo"
+  description="Demonstrating Astro's built-in image optimization"
+>
   <div class="max-w-4xl mx-auto p-4">
     <h1 class="text-3xl font-bold mb-8">Image Optimization Demo</h1>
-    
+
     <div class="space-y-8">
       <section>
         <h2 class="text-2xl font-semibold mb-4">Remote Image Optimization</h2>
         <p class="mb-4">This image is loaded from a remote URL and optimized by Astro:</p>
-        
+
         <div class="overflow-hidden rounded-lg shadow-lg">
           <img
             src="/og-image.png"
@@ -24,10 +27,11 @@ import { Image } from 'astro:assets';
           />
         </div>
         <p class="mt-2 text-sm text-gray-500">
-          Using our local OG image as an example. The built-in Astro image optimization can convert it to WebP format with optimal quality.
+          Using our local OG image as an example. The built-in Astro image optimization can convert
+          it to WebP format with optimal quality.
         </p>
       </section>
-      
+
       <!-- Uncomment when you have local images
       <section>
         <h2 class="text-2xl font-semibold mb-4">Local Image Optimization</h2>
@@ -44,7 +48,7 @@ import { Image } from 'astro:assets';
         </div>
       </section>
       -->
-      
+
       <section>
         <h2 class="text-2xl font-semibold mb-4">Best Practices for Image Optimization</h2>
         <ul class="list-disc pl-6 space-y-2">
@@ -56,10 +60,11 @@ import { Image } from 'astro:assets';
           <li>Use responsive images with different sizes for different viewports</li>
         </ul>
       </section>
-      
+
       <section>
         <h2 class="text-2xl font-semibold mb-4">Implementation in Astro</h2>
-        <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-auto"><code>{`---
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-auto"><code>{`---
 // In your Astro component or page
 import { Image } from 'astro:assets';
 import myImage from '../assets/my-image.jpg';
@@ -86,4 +91,4 @@ import myImage from '../assets/my-image.jpg';
       </section>
     </div>
   </div>
-</Layout> 
+</Layout>

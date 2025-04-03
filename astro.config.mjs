@@ -10,19 +10,19 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://bitgeese.io',
   vite: {
-      plugins: [tailwindcss()]
-    },
-  
+    plugins: [tailwindcss()],
+  },
+
   // Add image configuration to allow remote image optimization
   image: {
-    domains: ["source.unsplash.com", "images.unsplash.com"],
+    domains: ['source.unsplash.com', 'images.unsplash.com'],
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**.unsplash.com",
+        protocol: 'https',
+        hostname: '**.unsplash.com',
       },
     ],
   },
 
-  integrations: [mdx(), sitemap()]
+  integrations: [mdx(), sitemap()],
 });

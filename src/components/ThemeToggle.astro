@@ -1,9 +1,9 @@
 <button
   id="theme-toggle"
-  aria-label="Switch to dark mode" 
+  aria-label="Switch to dark mode"
   class="text-xs text-muted hover:text-foreground/80 transition-colors duration-200"
 >
-  dark 
+  dark
 </button>
 
 <script is:inline>
@@ -12,7 +12,7 @@
     if (!button) return;
 
     const isDarkMode = document.documentElement.classList.contains('dark');
-    
+
     if (isDarkMode) {
       button.textContent = 'dark';
       button.setAttribute('aria-label', 'Switch to light mode');
@@ -27,22 +27,22 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
-    
+
     if (themeToggle) {
       themeToggle.addEventListener('click', () => {
         // Toggle dark class on document root element
         document.documentElement.classList.toggle('dark');
-        
+
         // Update localStorage
         if (document.documentElement.classList.contains('dark')) {
           localStorage.setItem('theme', 'dark');
         } else {
           localStorage.setItem('theme', 'light');
         }
-        
+
         // Update the button text and aria-label
         updateThemeToggleButtonState();
       });
     }
   });
-</script> 
+</script>

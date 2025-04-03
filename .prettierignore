@@ -1,5 +1,0 @@
-.husky/
-node_modules/
-dist/
-.astro/
-pnpm-lock.yaml 

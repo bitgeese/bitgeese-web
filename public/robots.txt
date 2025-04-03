@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://bitgeese.io/sitemap-index.xml 
+Sitemap: /sitemap-index.xml 

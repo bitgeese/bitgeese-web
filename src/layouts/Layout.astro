@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
-import { SEO } from "astro-seo";
+import { SEO } from 'astro-seo';
 
 export interface Props {
   title: string;
@@ -15,86 +15,41 @@ export interface Props {
   tags?: string[];
 }
 
-const { 
-  title = "Bitgeese | Web3 Development", 
-  description = "Professional Web3 development services and blockchain solutions", 
-  keywords = "web3, blockchain, cryptocurrency, smart contracts, dApps, development, ethereum, bitcoin",
-  image = "/og-image.png", // Default OG image path - you should create this file
+const {
+  title = 'Bitgeese | Web3 Development',
+  description = 'Professional Web3 development services and blockchain solutions',
+  keywords = 'web3, blockchain, cryptocurrency, smart contracts, dApps, development, ethereum, bitcoin',
+  image = '/og-image.png', // Default OG image path - you should create this file
   article = false,
   publishedTime,
   modifiedTime,
   authors,
   section,
-  tags
+  tags,
 } = Astro.props;
 
-// Define base URL and site name
-const siteUrl = Astro.site?.toString() || "https://your-default-domain.com"; // Replace with fallback if needed
-const siteName = "Bitgeese";
-const logoPath = "/logo.png"; // Ensure this logo exists or update path
-
 // Define social links here
-const githubUrl = "https://github.com/bitgeese";
-const twitterUrl = "https://x.com/MaciejJanowski";
+const githubUrl = 'https://github.com/bitgeese';
+const twitterUrl = 'https://x.com/MaciejJanowski';
 
 // Build SEO configuration
 const openGraphBasic = {
   title: title,
-  type: article ? "article" : "website",
+  type: article ? 'article' : 'website',
   image: new URL(image, Astro.site).toString(),
   url: Astro.url.href,
 };
 
 // Article specific props
-const openGraphArticle = article ? {
-  publishedTime: publishedTime,
-  modifiedTime: modifiedTime,
-  authors: authors,
-  section: section,
-  tags: tags
-} : undefined;
-
-// Define Schema.org structures
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteName,
-  url: siteUrl,
-  logo: new URL(logoPath, siteUrl).toString(),
-  sameAs: [
-    githubUrl,
-    twitterUrl
-    // Add other relevant social/profile links here
-  ]
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: siteName,
-  url: siteUrl,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${siteUrl}/search?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
-};
-
-const articleSchema = article ? {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: title,
-  image: [new URL(image, siteUrl).toString()],
-  datePublished: publishedTime,
-  dateModified: modifiedTime || publishedTime,
-  author: authors ? authors.map(name => ({ "@type": "Person", name })) : [{ "@type": "Organization", name: siteName }],
-  publisher: { "@type": "Organization", name: siteName, url: siteUrl, logo: new URL(logoPath, siteUrl).toString() },
-  description: description,
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": Astro.url.href
-  }
-} : undefined;
+const openGraphArticle = article
+  ? {
+      publishedTime: publishedTime,
+      modifiedTime: modifiedTime,
+      authors: authors,
+      section: section,
+      tags: tags,
+    }
+  : undefined;
 ---
 
 <!doctype html>
@@ -104,7 +59,7 @@ const articleSchema = article ? {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <SEO
       title={title}
       description={description}
@@ -113,8 +68,8 @@ const articleSchema = article ? {
         basic: openGraphBasic,
         optional: {
           description: description,
-          locale: "en_US",
-          siteName: "Bitgeese",
+          locale: 'en_US',
+          siteName: 'Bitgeese',
         },
         article: openGraphArticle,
         image: {
@@ -122,9 +77,9 @@ const articleSchema = article ? {
         },
       }}
       twitter={{
-        card: "summary_large_image",
-        site: "@MaciejJanowski",
-        creator: "@MaciejJanowski",
+        card: 'summary_large_image',
+        site: '@MaciejJanowski',
+        creator: '@MaciejJanowski',
         title: title,
         description: description,
         image: new URL(image, Astro.site).toString(),
@@ -132,35 +87,27 @@ const articleSchema = article ? {
       }}
       extend={{
         meta: [
-          { name: "keywords", content: keywords },
-          { name: "theme-color", content: "#ffffff" },
+          { name: 'keywords', content: keywords },
+          { name: 'theme-color', content: '#ffffff' },
         ],
-        link: [
-          { rel: "sitemap", href: "/sitemap-index.xml" },
-        ],
+        link: [{ rel: 'sitemap', href: '/sitemap-index.xml' }],
       }}
     />
-    
-    <!-- Schema.org JSON-LD -->
-    <script type="application/ld+json" is:inline set:html={
-      JSON.stringify([
-        organizationSchema,
-        websiteSchema,
-        ...(articleSchema ? [articleSchema] : [])
-      ])
-    }/>
-    
+
     <!-- Prevent flash of unstyled content -->
     <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      if (localStorage.getItem('theme') === 'dark' || 
-          (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      if (
+        localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
     </script>
-    
+
     <!-- Add global styles for focus states -->
     <style is:inline>
       /* Improved focus styles for better accessibility */
@@ -168,7 +115,7 @@ const articleSchema = article ? {
         outline: 2px solid #5b95e3 !important;
         outline-offset: 2px !important;
       }
-      
+
       /* Skip to content link styles */
       .skip-to-content {
         position: absolute;
@@ -183,11 +130,11 @@ const articleSchema = article ? {
         text-decoration: none;
         border-radius: 0 0 0.25rem 0.25rem;
       }
-      
+
       .skip-to-content:focus {
         top: 0;
       }
-      
+
       .dark .skip-to-content {
         background: #1e293b;
         color: #ffffff;
@@ -198,10 +145,8 @@ const articleSchema = article ? {
   </head>
   <body class="min-h-screen relative">
     <!-- Skip to content link -->
-    <a href="#main-content" class="skip-to-content">
-      Skip to content
-    </a>
-    
+    <a href="#main-content" class="skip-to-content"> Skip to content </a>
+
     <!-- Theme toggle positioned in the top right corner -->
     <div class="absolute top-4 right-4 z-10">
       <ThemeToggle />
@@ -209,7 +154,7 @@ const articleSchema = article ? {
 
     <!-- Social links: top-left on mobile, bottom-left on desktop -->
     <div class="absolute top-4 left-4 sm:top-auto sm:bottom-4 flex items-center gap-x-3 z-10">
-      <a 
+      <a
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -219,7 +164,7 @@ const articleSchema = article ? {
         gh
       </a>
       <span class="text-xs text-muted">/</span>
-      <a 
+      <a
         href={twitterUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -231,8 +176,12 @@ const articleSchema = article ? {
     </div>
 
     <!-- Main content area with padding handled by the layout -->
-    <main id="main-content" class="flex min-h-screen flex-col items-center justify-center pt-16 pb-16 px-4 sm:pt-8 sm:pb-8 sm:px-8" tabindex="-1">
+    <main
+      id="main-content"
+      class="flex min-h-screen flex-col items-center justify-center pt-16 pb-16 px-4 sm:pt-8 sm:pb-8 sm:px-8"
+      tabindex="-1"
+    >
       <slot />
     </main>
   </body>
-</html> 
+</html>

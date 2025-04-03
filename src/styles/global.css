@@ -1,21 +1,21 @@
 /* Import Tailwind CSS using the recommended method for Tailwind 4 */
-@import "tailwindcss";
+@import 'tailwindcss';
 /* Import custom fonts */
-@import "./fonts.css";
+@import './fonts.css';
 
 :root {
   /* Light Theme: Clay Tones (Default) */
-  --color-background: #F2EADF; /* Warm cream */
-  --color-foreground: #73574D; /* Rich terracotta */
-  --color-accent: #73574D; /* Used for subtle accents, same as foreground */
+  --color-background: #f2eadf; /* Warm cream */
+  --color-foreground: #73574d; /* Rich terracotta */
+  --color-accent: #73574d; /* Used for subtle accents, same as foreground */
   --color-muted: rgba(115, 87, 77, 0.5); /* Muted version of foreground */
 }
 
 .dark {
   /* Dark Theme: Obsidian (Default) */
-  --color-background: #1E1E24; /* Deep charcoal */
-  --color-foreground: #D7D6D6; /* Soft silver */
-  --color-accent: #D7D6D6; /* Same as foreground */
+  --color-background: #1e1e24; /* Deep charcoal */
+  --color-foreground: #d7d6d6; /* Soft silver */
+  --color-accent: #d7d6d6; /* Same as foreground */
   --color-muted: rgba(215, 214, 214, 0.5); /* Muted version of foreground */
 }
 
@@ -44,8 +44,13 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   /* Premium monospace font stack with excellent fallbacks */
-  font-family: 'CommitMono', 'Space Mono', 'GT America Mono', 'Apercu Mono', 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', 'Roboto Mono', 'SF Mono', 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family:
+    'CommitMono', 'Space Mono', 'GT America Mono', 'Apercu Mono', 'JetBrains Mono', 'IBM Plex Mono',
+    'Fira Code', 'Roboto Mono', 'SF Mono', 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Remove the explicit @tailwind directives below */

@@ -2,37 +2,44 @@
 import Layout from '../layouts/Layout.astro';
 
 const screenSizes = [
-  { name: "Mobile Small", width: "320px", class: "w-[320px]" },
-  { name: "Mobile Medium", width: "375px", class: "w-[375px]" },
-  { name: "Mobile Large", width: "425px", class: "w-[425px]" },
-  { name: "Tablet", width: "768px", class: "w-[768px]" },
-  { name: "Laptop", width: "1024px", class: "w-[1024px]" },
-  { name: "Desktop", width: "1440px", class: "w-[1440px]" },
+  { name: 'Mobile Small', width: '320px', class: 'w-[320px]' },
+  { name: 'Mobile Medium', width: '375px', class: 'w-[375px]' },
+  { name: 'Mobile Large', width: '425px', class: 'w-[425px]' },
+  { name: 'Tablet', width: '768px', class: 'w-[768px]' },
+  { name: 'Laptop', width: '1024px', class: 'w-[1024px]' },
+  { name: 'Desktop', width: '1440px', class: 'w-[1440px]' },
 ];
 ---
 
-<Layout title="Responsive Design Test" description="Testing responsive design across different screen sizes">
+<Layout
+  title="Responsive Design Test"
+  description="Testing responsive design across different screen sizes"
+>
   <div class="max-w-[1440px] w-full mx-auto p-4">
     <h1 class="text-3xl font-bold mb-8">Responsive Design Test</h1>
-    
+
     <div class="space-y-8">
       <section>
         <h2 class="text-2xl font-semibold mb-4">Viewport Testing</h2>
         <p class="mb-6">
-          This page provides visual tools for checking how your design responds to different screen sizes.
-          Current viewport width: <span id="current-width" class="font-mono font-bold">--</span>
+          This page provides visual tools for checking how your design responds to different screen
+          sizes. Current viewport width: <span id="current-width" class="font-mono font-bold"
+            >--</span
+          >
         </p>
-        
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-          {screenSizes.map(size => (
-            <div class="border rounded p-4 text-center">
-              <h3 class="font-semibold mb-2">{size.name}</h3>
-              <p class="font-mono text-sm">{size.width}</p>
-            </div>
-          ))}
+          {
+            screenSizes.map((size) => (
+              <div class="border rounded p-4 text-center">
+                <h3 class="font-semibold mb-2">{size.name}</h3>
+                <p class="font-mono text-sm">{size.width}</p>
+              </div>
+            ))
+          }
         </div>
       </section>
-      
+
       <section>
         <h2 class="text-2xl font-semibold mb-4">Tailwind Breakpoints</h2>
         <div class="grid grid-cols-1 gap-4">
@@ -64,10 +71,10 @@ const screenSizes = [
           </div>
         </div>
       </section>
-      
+
       <section>
         <h2 class="text-2xl font-semibold mb-4">Element Responsiveness Test</h2>
-        
+
         <div class="space-y-6">
           <div>
             <h3 class="text-xl font-medium mb-2">Text Sizing</h3>
@@ -79,19 +86,21 @@ const screenSizes = [
             <p class="text-2xl">2XL: The quick brown fox jumps over the lazy dog.</p>
             <p class="text-3xl">3XL: The quick brown fox jumps over the lazy dog.</p>
           </div>
-          
+
           <div>
             <h3 class="text-xl font-medium mb-2">Grid Layout Test</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {Array.from({ length: 8 }).map((_, i) => (
-                <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded">
-                  <p class="font-semibold">Item {i + 1}</p>
-                  <p class="text-sm">This item should reflow based on screen size.</p>
-                </div>
-              ))}
+              {
+                Array.from({ length: 8 }).map((_, i) => (
+                  <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded">
+                    <p class="font-semibold">Item {i + 1}</p>
+                    <p class="text-sm">This item should reflow based on screen size.</p>
+                  </div>
+                ))
+              }
             </div>
           </div>
-          
+
           <div>
             <h3 class="text-xl font-medium mb-2">Flex Layout Test</h3>
             <div class="flex flex-col sm:flex-row gap-4 flex-wrap">
@@ -120,4 +129,4 @@ const screenSizes = [
 
   // Update on resize
   window.addEventListener('resize', updateViewportWidth);
-</script> 
+</script>

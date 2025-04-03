@@ -1,20 +1,20 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import '../../styles/global.css';
 
 // Navigation links - standardized across all pages
 const links = [
-	{ name: "writings", url: "/writings" },
-	{ name: "projects", url: "/projects" },
-	{ name: "linkedin", url: "https://linkedin.com/in/maciej-janowski-57755a149/" },
+  { name: 'writings', url: '/writings' },
+  { name: 'projects', url: '/projects' },
+  { name: 'linkedin', url: 'https://linkedin.com/in/maciej-janowski-57755a149/' },
 ];
 
 // Removed social media links constants
-const brandName = "bitgeese";
+const brandName = 'bitgeese';
 
 export async function getStaticPaths() {
-  const writings = await getCollection("writings");
+  const writings = await getCollection('writings');
   return writings.map((writing) => ({
     params: { slug: writing.slug },
     props: { writing },
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  writing: CollectionEntry<"writings">;
+  writing: CollectionEntry<'writings'>;
 };
 
 const { writing } = Astro.props;
@@ -37,19 +37,21 @@ const { Content } = await writing.render();
       <nav class="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-8">
         <a href="/" class="text-lg font-semibold mr-2">{brandName}</a>
         <span class="text-muted">/</span>
-        {links.map((link, index) => (
-          <>
-            <a
-              href={link.url}
-              rel={link.url.startsWith('/') ? undefined : 'noopener noreferrer'}
-              target={link.url.startsWith('/') ? undefined : '_blank'}
-              class="text-base underline hover:text-foreground/80 transition-colors duration-200"
-            >
-              {link.name}
-            </a>
-            {index < links.length - 1 && <span class="text-muted">/</span>}
-          </>
-        ))}
+        {
+          links.map((link, index) => (
+            <>
+              <a
+                href={link.url}
+                rel={link.url.startsWith('/') ? undefined : 'noopener noreferrer'}
+                target={link.url.startsWith('/') ? undefined : '_blank'}
+                class="text-base underline hover:text-foreground/80 transition-colors duration-200"
+              >
+                {link.name}
+              </a>
+              {index < links.length - 1 && <span class="text-muted">/</span>}
+            </>
+          ))
+        }
       </nav>
     </div>
 
@@ -65,15 +67,15 @@ const { Content } = await writing.render();
 
   <!-- Load Motion One from CDN -->
   <script is:inline src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
-  
+
   <script is:inline>
     // Motion is available as a global variable when using the CDN version
     document.addEventListener('DOMContentLoaded', () => {
       Motion.animate(
-        ".w-full.max-w-lg", // Target the inner div now
+        '.w-full.max-w-lg', // Target the inner div now
         { opacity: [0, 1], y: [5, 0] }, // Reduced y-offset for less pronounced movement
-        { duration: 0.5, easing: "ease-out", delay: 0.1 }
+        { duration: 0.5, easing: 'ease-out', delay: 0.1 }
       );
     });
   </script>
-</Layout> 
+</Layout>

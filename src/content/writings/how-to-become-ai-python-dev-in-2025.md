@@ -6,9 +6,9 @@ author: 'bitgeese'
 image:
   url: '/images/writing-placeholder.png'
   alt: 'Placeholder image for writing'
-tags: ["job hunt"]
+tags: ['job hunt']
 ---
 
 ## Introduction
 
-This is the content of the example writing piece. You can use Markdown here. 
+This is the content of the example writing piece. You can use Markdown here.
