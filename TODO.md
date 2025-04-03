@@ -2,12 +2,12 @@
 
 ## P1: Foundational SEO & Performance
 
-- [ ] **Create `robots.txt`:** Add a `public/robots.txt` file to guide web crawlers. Define rules for allowed/disallowed paths.
-- [ ] **Setup Sitemap Generation:** Configure Astro (e.g., using `@astrojs/sitemap`) to automatically generate `sitemap.xml` on build.
-- [ ] **Audit Meta Tags:** Review base layouts (`src/layouts/`) and crucial pages (`src/pages/`) for optimal `<title>` and `<meta name="description">` tags. Ensure they are unique and descriptive.
-- [ ] **Implement Open Graph & Twitter Cards:** Add necessary meta tags (og:title, og:description, og:image, twitter:card, etc.) to the base layout for better social media sharing previews.
-- [ ] **Check Image Optimization:** Verify that images used are optimized (format, compression, dimensions). Consider Astro's built-in image optimization or manual optimization.
-- [ ] **Run Dependency Audit:** Execute `pnpm audit` to check for known vulnerabilities in project dependencies and update/address them.
+- [x] **Create `robots.txt`:** Add a `public/robots.txt` file to guide web crawlers. Define rules for allowed/disallowed paths.
+- [x] **Setup Sitemap Generation:** Configure Astro (e.g., using `@astrojs/sitemap`) to automatically generate `sitemap.xml` on build.
+- [x] **Audit Meta Tags:** Review base layouts (`src/layouts/`) and crucial pages (`src/pages/`) for optimal `<title>` and `<meta name="description">` tags. Ensure they are unique and descriptive.
+- [x] **Implement Open Graph & Twitter Cards:** Add necessary meta tags (og:title, og:description, og:image, twitter:card, etc.) to the base layout for better social media sharing previews.
+- [x] **Check Image Optimization:** Set up Astro's built-in image optimization configuration in `astro.config.mjs`. Created demo page at `/image-demo` to showcase best practices.
+- [x] **Run Dependency Audit:** Executed `pnpm audit` to check for known vulnerabilities in project dependencies - no issues found.
 
 ## P2: Accessibility & Best Practices
 

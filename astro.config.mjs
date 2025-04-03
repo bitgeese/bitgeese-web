@@ -12,6 +12,17 @@ export default defineConfig({
   vite: {
       plugins: [tailwindcss()]
     },
+  
+  // Add image configuration to allow remote image optimization
+  image: {
+    domains: ["source.unsplash.com", "images.unsplash.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.unsplash.com",
+      },
+    ],
+  },
 
   integrations: [mdx(), sitemap()]
 });
