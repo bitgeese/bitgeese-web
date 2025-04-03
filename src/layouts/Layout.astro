@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from '../components/ThemeToggle.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -6,6 +8,10 @@ export interface Props {
 }
 
 const { title = "Maciej Janowski | Backend Engineer", description = "Backend Engineer (web + ai)", keywords = "python developer, backend developer, ai developer, freelance developer, web developer, astro, tailwind css" } = Astro.props;
+
+// Define social links here
+const githubUrl = "https://github.com/bitgeese";
+const twitterUrl = "https://x.com/MaciejJanowski";
 ---
 
 <!doctype html>
@@ -33,7 +39,38 @@ const { title = "Maciej Janowski | Backend Engineer", description = "Backend Eng
     {/* Add more SEO tags here as needed */}
     <slot name="head" />
   </head>
-  <body class="min-h-screen">
-    <slot />
+  <body class="min-h-screen relative">
+    <!-- Theme toggle positioned in the top right corner -->
+    <div class="absolute top-4 right-4 z-10">
+      <ThemeToggle />
+    </div>
+
+    <!-- Social links: top-left on mobile, bottom-left on desktop -->
+    <div class="absolute top-4 left-4 sm:top-auto sm:bottom-4 flex items-center gap-x-3 z-10">
+      <a 
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-muted hover:text-foreground/80 transition-colors duration-200"
+        aria-label="GitHub Profile"
+      >
+        gh
+      </a>
+      <span class="text-xs text-muted">/</span>
+      <a 
+        href={twitterUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-muted hover:text-foreground/80 transition-colors duration-200"
+        aria-label="X.com Profile"
+      >
+        x
+      </a>
+    </div>
+
+    <!-- Main content area with padding handled by the layout -->
+    <main class="flex min-h-screen flex-col items-center justify-center pt-16 pb-16 px-4 sm:pt-8 sm:pb-8 sm:px-8">
+      <slot />
+    </main>
   </body>
 </html> 
