@@ -1,4 +1,46 @@
-# Astro with Tailwind
+# BitGeese Web
+
+Personal website for BitGeese, a software development brand by Maciej Janowski.
+
+## About
+
+This is a personal website/portfolio built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com). It showcases projects, writings, and professional information.
+
+## Features
+
+- Modern, minimalist design
+- Dark/light theme toggle
+- Responsive layout
+- Projects showcase
+- Blog/writing section
+- Fast performance with Astro
+
+## Tech Stack
+
+- [Astro](https://astro.build) - Web framework
+- [Tailwind CSS v4](https://tailwindcss.com) - Styling
+- [Motion One](https://motion.dev) - Animation library
+- [MDX](https://mdxjs.com) - Content authoring
+
+## Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+## License
+
+MIT
 
 ```sh
 pnpm create astro@latest -- --template with-tailwindcss
