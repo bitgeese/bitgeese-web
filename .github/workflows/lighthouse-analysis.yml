@@ -46,6 +46,17 @@ jobs:
       - name: Build site
         run: pnpm build
 
+      # Start server before running Lighthouse
+      - name: Install serve
+        run: npm install -g serve
+
+      - name: Start server
+        run: serve -s dist -l 8080 &
+        
+      # Wait for server to be ready
+      - name: Wait for server
+        run: sleep 3
+
       - name: Run Lighthouse CI
         id: lhci
         uses: treosh/lighthouse-ci-action@v11
@@ -58,9 +69,6 @@ jobs:
           configPath: './lighthouserc.cjs'
           serverBaseUrl: ${{ secrets.LHCI_SERVER_URL }}
           serverToken: ${{ secrets.LHCI_TOKEN }}
-          before: |
-            npm install -g serve
-            serve -s dist -l 8080 &
 
       - name: Format Lighthouse score
         id: format_lighthouse_score
@@ -77,7 +85,13 @@ jobs:
               const urlName = url.url.replace(/^https?:\/\//, '');
               const summary = url.summary;
               
-              summaryRows.push(`| ${urlName} | ${summary.performance} | ${summary.accessibility} | ${summary.best-practices} | ${summary.seo} |`);
+              // Fix the property access for hyphenated properties
+              const performance = summary.performance;
+              const accessibility = summary.accessibility;
+              const bestPractices = summary["best-practices"]; // Use quotes around the key
+              const seo = summary.seo;
+              
+              summaryRows.push(`| ${urlName} | ${performance} | ${accessibility} | ${bestPractices} | ${seo} |`);
               
               // Add details with emoji indicators
               const getScoreEmoji = (score) => {
@@ -87,10 +101,10 @@ jobs:
               };
               
               detailRows.push(`### ${urlName}`);
-              detailRows.push(`- Performance: ${getScoreEmoji(summary.performance)} ${Math.round(summary.performance * 100)}`);
-              detailRows.push(`- Accessibility: ${getScoreEmoji(summary.accessibility)} ${Math.round(summary.accessibility * 100)}`);
-              detailRows.push(`- Best Practices: ${getScoreEmoji(summary['best-practices'])} ${Math.round(summary['best-practices'] * 100)}`);
-              detailRows.push(`- SEO: ${getScoreEmoji(summary.seo)} ${Math.round(summary.seo * 100)}`);
+              detailRows.push(`- Performance: ${getScoreEmoji(performance)} ${Math.round(performance * 100)}`);
+              detailRows.push(`- Accessibility: ${getScoreEmoji(accessibility)} ${Math.round(accessibility * 100)}`);
+              detailRows.push(`- Best Practices: ${getScoreEmoji(bestPractices)} ${Math.round(bestPractices * 100)}`);
+              detailRows.push(`- SEO: ${getScoreEmoji(seo)} ${Math.round(seo * 100)}`);
               detailRows.push('');
             }
             
