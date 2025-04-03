@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// We'll use a more reliable static image
+---
+
+<Layout title="Image Optimization Demo" description="Demonstrating Astro's built-in image optimization">
+  <div class="max-w-4xl mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-8">Image Optimization Demo</h1>
+    
+    <div class="space-y-8">
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">Remote Image Optimization</h2>
+        <p class="mb-4">This image is loaded from a remote URL and optimized by Astro:</p>
+        
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img
+            src="/og-image.png"
+            alt="Bitgeese WebP Demo Image"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+        <p class="mt-2 text-sm text-gray-500">
+          Using our local OG image as an example. The built-in Astro image optimization can convert it to WebP format with optimal quality.
+        </p>
+      </section>
+      
+      <!-- Uncomment when you have local images
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">Local Image Optimization</h2>
+        <p class="mb-4">This image is imported from your local assets and optimized:</p>
+        
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <Image
+            src={demoImage}
+            alt="Demo local image"
+            width={800}
+            format="webp"
+            quality={80}
+          />
+        </div>
+      </section>
+      -->
+      
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">Best Practices for Image Optimization</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Always include proper width and height attributes to prevent layout shifts</li>
+          <li>Use WebP format for best compression-to-quality ratio</li>
+          <li>Set appropriate quality (70-85% is usually a good balance)</li>
+          <li>Always provide meaningful alt text for accessibility</li>
+          <li>Consider using lazy loading for images below the fold</li>
+          <li>Use responsive images with different sizes for different viewports</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">Implementation in Astro</h2>
+        <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-auto"><code>{`---
+// In your Astro component or page
+import { Image } from 'astro:assets';
+import myImage from '../assets/my-image.jpg';
+
+// For local images
+<Image 
+  src={myImage} 
+  alt="Description" 
+  width={800}
+  format="webp"
+  quality={80}
+/>
+
+// For remote images
+<Image 
+  src="https://example.com/image.jpg" 
+  alt="Description" 
+  width={800}
+  height={600}
+  format="webp"
+  quality={80}
+/>
+`}</code></pre>
+      </section>
+    </div>
+  </div>
+</Layout> 

@@ -11,12 +11,12 @@
 
 ## P2: Accessibility & Best Practices
 
-- [ ] **Accessibility Audit (Basic):**
-    - [ ] Review semantic HTML usage in key components and layouts.
-    - [ ] Check color contrast ratios for text and background elements.
-    - [ ] Test basic keyboard navigation for interactive elements (links, buttons, forms).
-- [ ] **Setup Linting/Formatting:** Ensure Prettier and ESLint (or similar) are configured and integrated into the development workflow (e.g., pre-commit hooks).
-- [ ] **Review Responsive Design:** Test the site layout on various screen sizes (desktop, tablet, mobile).
+- [x] **Accessibility Audit (Basic):**
+    - [x] Review semantic HTML usage in key components and layouts.
+    - [x] Check color contrast ratios for text and background elements.
+    - [x] Test basic keyboard navigation for interactive elements (links, buttons, forms).
+- [x] **Setup Linting/Formatting:** Added ESLint and Prettier with Astro plugins. Added npm scripts for linting and formatting.
+- [x] **Review Responsive Design:** Created testing page at `/responsive-test` to verify proper behavior across different screen sizes.
 
 ## P3: Advanced SEO & Content
 
