@@ -43,6 +43,27 @@
   --color-muted: rgba(192, 222, 213, 0.5); /* Muted version of foreground */
 }
 
+/* Prevent scrollbar layout shifts */
+html {
+  overflow-y: scroll; /* Always show vertical scrollbar */
+  scrollbar-width: thin; /* For Firefox: make scrollbar thinner */
+  scrollbar-color: var(--color-muted) transparent; /* For Firefox: customize scrollbar colors */
+}
+
+/* For Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 8px; /* Make scrollbar thinner */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Scrollbar track background */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-muted); /* Scrollbar thumb color */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);

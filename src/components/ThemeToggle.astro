@@ -5,8 +5,9 @@
 >
   <!-- Sun icon (shown in dark mode) -->
   <svg 
+    id="sun-icon"
     xmlns="http://www.w3.org/2000/svg" 
-    class="icon dark:inline hidden h-5 w-5" 
+    class="h-5 w-5 hidden" 
     fill="none" 
     viewBox="0 0 24 24" 
     stroke="currentColor"
@@ -21,8 +22,9 @@
   
   <!-- Moon icon (shown in light mode) -->
   <svg 
+    id="moon-icon"
     xmlns="http://www.w3.org/2000/svg" 
-    class="icon dark:hidden inline h-5 w-5" 
+    class="h-5 w-5 hidden" 
     fill="none" 
     viewBox="0 0 24 24" 
     stroke="currentColor"
@@ -37,13 +39,24 @@
 </button>
 
 <script is:inline>
-  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-  if (localStorage.getItem('theme') === 'dark' || 
-      (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
+  function updateThemeToggleIcon() {
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
+    if (sunIcon && moonIcon) {
+      if (isDarkMode) {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
   }
+
+  // Initial icon state
+  document.addEventListener('DOMContentLoaded', updateThemeToggleIcon);
 
   document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
@@ -59,6 +72,9 @@
         } else {
           localStorage.setItem('theme', 'light');
         }
+        
+        // Update the icon visibility
+        updateThemeToggleIcon();
       });
     }
   });
