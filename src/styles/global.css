@@ -2,45 +2,18 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Theme: Soft Circuit (Default) */
-  --color-background: #EBF4F0; /* Very pale green/cyan off-white */
-  --color-foreground: #2A4035; /* Deep, muted green-grey */
-  --color-accent: #2A4035; /* Used for subtle accents, same as foreground */
-  --color-muted: rgba(42, 64, 53, 0.5); /* Muted version of foreground */
+  --color-background: #F2EADF;
+  --color-foreground: #73574D;
+  --color-accent: #73574D;
+  --color-muted: rgba(115, 87, 77, 0.5);
 
-  /* --- Theme Options (Uncomment a pair to activate) --- */
-
-  /* Arcade Glow */
-  /*
-  --color-background: #F0EBF4; /* Pale Lavender White */
-  /* --color-foreground: #352A40; /* Deep Muted Purple-Grey */
-  /* */
-
-  /* Pixel Dust */
-  /*
-  --color-background: #EFF2F5; /* Light Cool Grey-Blue */
-  /* --color-foreground: #203840; /* Dark Desaturated Teal-Charcoal */
-  /* */
-
-  /* Console Cream */
-  /*
-  --color-background: #F5F3EE; /* Warm Creamy Off-White */
-  /* --color-foreground: #454138; /* Dark Warm Brownish-Grey */
-  /* */
-
-  /* Previous Theme: Deep Void Violet (Dark Mode) */
-  /*
-  --color-background: #1A102C; /* Deep Void Violet */
-  /* --color-foreground: #E8E0F3; /* Light Lavender text */
-  /* */
 }
 
 .dark {
-  /* Dark Theme: Deep Teal - analogous to the light mode's green tones */
-  --color-background: #0B2C32; /* Deep teal (analogous to green but darker) */
-  --color-foreground: #C0DED5; /* Light mint (analogous to the light mode's pale green but brighter) */
-  --color-accent: #C0DED5; /* Used for subtle accents, same as foreground */
-  --color-muted: rgba(192, 222, 213, 0.5); /* Muted version of foreground */
+  --color-background: #1E1E24;
+  --color-foreground: #D7D6D6;
+  --color-accent: #D7D6D6;
+  --color-muted: rgba(215, 214, 214, 0.5);
 }
 
 /* Prevent scrollbar layout shifts */
