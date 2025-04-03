@@ -1,17 +1,53 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
+import { SEO } from "astro-seo";
 
 export interface Props {
   title: string;
   description?: string;
   keywords?: string;
+  image?: string;
+  article?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  authors?: string[];
+  section?: string;
+  tags?: string[];
 }
 
-const { title = "Maciej Janowski | Backend Engineer", description = "Backend Engineer (web + ai)", keywords = "python developer, backend developer, ai developer, freelance developer, web developer, astro, tailwind css" } = Astro.props;
+const { 
+  title = "Bitgeese | Web3 Development", 
+  description = "Professional Web3 development services and blockchain solutions", 
+  keywords = "web3, blockchain, cryptocurrency, smart contracts, dApps, development, ethereum, bitcoin",
+  image = "/og-image.png", // Default OG image path - you should create this file
+  article = false,
+  publishedTime,
+  modifiedTime,
+  authors,
+  section,
+  tags
+} = Astro.props;
 
 // Define social links here
 const githubUrl = "https://github.com/bitgeese";
 const twitterUrl = "https://x.com/MaciejJanowski";
+
+// Build SEO configuration
+const openGraphBasic = {
+  title: title,
+  type: article ? "article" : "website",
+  image: new URL(image, Astro.site).toString(),
+  url: Astro.url.href,
+};
+
+// Article specific props
+const openGraphArticle = article ? {
+  publishedTime: publishedTime,
+  modifiedTime: modifiedTime,
+  authors: authors,
+  section: section,
+  tags: tags
+} : undefined;
 ---
 
 <!doctype html>
@@ -21,9 +57,42 @@ const twitterUrl = "https://x.com/MaciejJanowski";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
+    
+    <SEO
+      title={title}
+      description={description}
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: openGraphBasic,
+        optional: {
+          description: description,
+          locale: "en_US",
+          siteName: "Bitgeese",
+        },
+        article: openGraphArticle,
+        image: {
+          alt: `${title} - Bitgeese`,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        site: "@MaciejJanowski",
+        creator: "@MaciejJanowski",
+        title: title,
+        description: description,
+        image: new URL(image, Astro.site).toString(),
+        imageAlt: `${title} - Bitgeese`,
+      }}
+      extend={{
+        meta: [
+          { name: "keywords", content: keywords },
+          { name: "theme-color", content: "#ffffff" },
+        ],
+        link: [
+          { rel: "sitemap", href: "/sitemap-index.xml" },
+        ],
+      }}
+    />
     
     <!-- Prevent flash of unstyled content -->
     <script is:inline>
@@ -36,7 +105,6 @@ const twitterUrl = "https://x.com/MaciejJanowski";
       }
     </script>
     
-    {/* Add more SEO tags here as needed */}
     <slot name="head" />
   </head>
   <body class="min-h-screen relative">
