@@ -18,10 +18,22 @@ const { title = "Maciej Janowski | Backend Engineer", description = "Backend Eng
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
+    
+    <!-- Prevent flash of unstyled content -->
+    <script is:inline>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.getItem('theme') === 'dark' || 
+          (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+    
     {/* Add more SEO tags here as needed */}
     <slot name="head" />
   </head>
-  <body class="bg-white text-black dark:bg-black dark:text-white min-h-screen font-sans">
+  <body class="min-h-screen">
     <slot />
   </body>
 </html> 
