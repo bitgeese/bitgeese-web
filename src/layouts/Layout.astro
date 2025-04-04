@@ -31,6 +31,10 @@ const {
 // Define social links here
 const githubUrl = 'https://github.com/bitgeese';
 const twitterUrl = 'https://x.com/MaciejJanowski';
+const linkedinUrl = 'https://linkedin.com/in/maciej-janowski-57755a149/';
+const facebookUrl = '#'; // Placeholder - Add your Facebook URL
+const instagramUrl = 'https://www.instagram.com/mjanoski__/'; // Placeholder - Add your Instagram URL
+const youtubeUrl = '#'; // Placeholder - Add your YouTube URL
 
 // Build SEO configuration
 const openGraphBasic = {
@@ -94,6 +98,27 @@ const openGraphArticle = article
       }}
     />
 
+    <!-- Basic Schema.org for Organization -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Bitgeese',
+        url: Astro.site ? Astro.site.toString() : 'https://bitgeese.io',
+        logo: new URL('/favicon.svg', Astro.site).toString(), // Assuming favicon is the logo
+        sameAs: [
+          githubUrl,
+          twitterUrl,
+          linkedinUrl,
+          // Add other profiles once URLs are available
+          // facebookUrl,
+          // instagramUrl,
+          // youtubeUrl
+        ],
+      })}
+    />
+
     <!-- Prevent flash of unstyled content -->
     <script is:inline>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -153,12 +178,12 @@ const openGraphArticle = article
     </div>
 
     <!-- Social links: top-left on mobile, bottom-left on desktop -->
-    <div class="absolute top-4 left-4 sm:top-auto sm:bottom-4 flex items-center gap-x-3 z-10">
+    <div class="absolute top-4 left-4 sm:top-auto sm:bottom-4 flex items-center gap-x-1 z-10">
       <a
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-xs text-muted hover:text-foreground/80 transition-colors duration-200"
+        class="text-xs text-muted hover:text-foreground/80 link-hover-lift-color"
         aria-label="GitHub Profile"
       >
         gh
@@ -168,11 +193,58 @@ const openGraphArticle = article
         href={twitterUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-xs text-muted hover:text-foreground/80 transition-colors duration-200"
+        class="text-xs text-muted hover:text-foreground/80 link-hover-lift-color"
         aria-label="X.com Profile"
       >
         x
       </a>
+      <span class="text-xs text-muted">/</span>
+      <a
+        href={instagramUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-xs text-muted hover:text-foreground/80 link-hover-lift-color"
+        aria-label="instagram.com Profile"
+      >
+        ig
+      </a>
+      {/* Add placeholders - remove/update when URLs are ready */}
+      {
+        facebookUrl !== '#' && (
+          <>
+            <>
+              <span class="text-xs text-muted">/</span>
+              <a
+                href={facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-muted hover:text-foreground/80 link-hover-lift-color"
+                aria-label="Facebook Profile"
+              >
+                fb
+              </a>
+            </>
+          </>
+        )
+      }
+      {
+        youtubeUrl !== '#' && (
+          <>
+            <>
+              <span class="text-xs text-muted">/</span>
+              <a
+                href={youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-muted hover:text-foreground/80 link-hover-lift-color"
+                aria-label="YouTube Channel"
+              >
+                yt
+              </a>
+            </>
+          </>
+        )
+      }
     </div>
 
     <!-- Main content area with padding handled by the layout -->
