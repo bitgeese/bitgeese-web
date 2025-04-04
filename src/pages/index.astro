@@ -13,9 +13,12 @@ const bio =
   'Python engineer building Django/FastAPI backends and LLM-powered apps. I like making useful stuff and teaching others how to code with AI.';
 const contactEmail = 'maciej.janowski1@icloud.com'; // Replace with your actual email
 const brandName = 'bitgeese';
+const pageTitle = 'Bitgeese | Custom Software & AI Development'; // New more descriptive title
+const pageDescription =
+  'Bitgeese provides custom software development focusing on Python backends (Django/FastAPI) and AI-powered applications. Building useful tools and fostering AI coding education.'; // New longer description
 ---
 
-<Layout title={brandName} description="Focused Precision.">
+<Layout title={pageTitle} description={pageDescription}>
   <div class="w-full max-w-lg space-y-8">
     <!-- Navigation container -->
     <div class="text-center">
@@ -41,7 +44,10 @@ const brandName = 'bitgeese';
       </nav>
     </div>
 
-    <section class="text-center">
+    <h1 class="text-center text-3xl font-bold sr-only">{brandName}</h1>
+
+    <section aria-labelledby="bio-heading" class="text-center">
+      <h2 id="bio-heading" class="sr-only">About</h2>
       <p class="text-base leading-relaxed">{bio}</p>
     </section>
 
