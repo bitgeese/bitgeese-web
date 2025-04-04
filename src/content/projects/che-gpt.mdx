@@ -5,8 +5,13 @@ publishDate: 2024-05-15
 tags: ['LLM', 'Ai', 'Fun']
 img: '/images/project-placeholder.png'
 img_alt: 'Placeholder image for project'
+projectUrl: 'http://chegpt.onrender.com'
 ---
+
+import ProjectLinkButton from '../../components/ProjectLinkButton.astro';
 
 ## Project Details
 
 More information about the project can go here in Markdown format.
+
+<ProjectLinkButton href={frontmatter.projectUrl} />

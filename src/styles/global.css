@@ -59,3 +59,13 @@ body {
 @tailwind components;
 @tailwind utilities; 
 */
+
+/* Custom utility classes */
+@layer utilities {
+  .link-hover-lift-color {
+    @apply inline-block transition-[color,transform] duration-200 ease-out hover:-translate-y-0.5;
+  }
+  .link-hover-lift-opacity {
+    @apply block transition-[opacity,transform] duration-200 ease-out hover:-translate-y-0.5;
+  }
+}

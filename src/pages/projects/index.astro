@@ -30,7 +30,7 @@ const allProjects = await getCollection('projects');
                 href={link.url}
                 rel={link.url.startsWith('/') ? undefined : 'noopener noreferrer'}
                 target={link.url.startsWith('/') ? undefined : '_blank'}
-                class="text-base underline hover:text-foreground/80 transition-colors duration-200"
+                class="text-base underline hover:text-foreground/80 link-hover-lift-color"
               >
                 {link.name}
               </a>
@@ -46,10 +46,7 @@ const allProjects = await getCollection('projects');
       {
         allProjects.map((project) => (
           <li>
-            <a
-              href={`/projects/${project.slug}/`}
-              class="block hover:opacity-80 transition-opacity"
-            >
+            <a href={`/projects/${project.slug}/`} class="hover:opacity-80 link-hover-lift-opacity">
               <h2 class="text-lg font-semibold">{project.data.title}</h2>
               <p class="mt-1">{project.data.description}</p>
             </a>
